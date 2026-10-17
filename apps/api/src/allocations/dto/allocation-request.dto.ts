@@ -2,6 +2,7 @@ import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   ArrayMinSize,
+  ArrayUnique,
   IsArray,
   IsInt,
   IsNotEmpty,
@@ -34,6 +35,7 @@ export class AllocationRequestDto implements AllocationRequest {
   })
   @IsArray()
   @ArrayMinSize(1)
+  @ArrayUnique((item: AllocationRequestItemDto) => item.productId)
   @ValidateNested({ each: true })
   @Type(() => AllocationRequestItemDto)
   items: AllocationRequestItemDto[];
@@ -50,13 +52,13 @@ export class AllocationRequestDto implements AllocationRequest {
   distanceToleranceKm?: number;
 
   @ApiPropertyOptional({
-    description: 'Maximum permitted warehouse distance from the customer, in kilometers.',
-    example: 100,
+    description: 'Maximum permitted warehouse distance from the customer, in kilometers. Use 0 for no distance limit.',
+    example: 0,
     minimum: 0,
-    exclusiveMinimum: true,
+    default: 0,
   })
   @IsOptional()
   @IsNumber({ allowNaN: false, allowInfinity: false })
-  @Min(Number.MIN_VALUE)
+  @Min(0)
   maxDistanceKm?: number;
 }

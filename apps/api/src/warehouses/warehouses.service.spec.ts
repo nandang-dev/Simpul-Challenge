@@ -28,9 +28,8 @@ describe('WarehousesService', () => {
         ],
       },
     ];
-    const repository = {
-      getWarehouses: jest.fn().mockReturnValue(warehouses),
-    } as unknown as InventoryRepository;
+    const getWarehouses = jest.fn().mockReturnValue(warehouses);
+    const repository = { getWarehouses } as unknown as InventoryRepository;
     const service = new WarehousesService(repository);
     const result = service.getWarehouses();
 
@@ -41,6 +40,6 @@ describe('WarehousesService', () => {
       hasColdStorage: true,
       hasRefrigeratedFleet: false,
     });
-    expect(repository.getWarehouses).toHaveBeenCalledTimes(1);
+    expect(getWarehouses).toHaveBeenCalledTimes(1);
   });
 });
