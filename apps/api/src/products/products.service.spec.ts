@@ -20,12 +20,11 @@ describe('ProductsService', () => {
         requiresColdChain: false,
       },
     ];
-    const repository = {
-      getProducts: jest.fn().mockReturnValue(products),
-    } as unknown as InventoryRepository;
+    const getProducts = jest.fn().mockReturnValue(products);
+    const repository = { getProducts } as unknown as InventoryRepository;
     const service = new ProductsService(repository);
 
     expect(service.getProducts().map(({ id }) => id)).toEqual(['P001', 'P002']);
-    expect(repository.getProducts).toHaveBeenCalledTimes(1);
+    expect(getProducts).toHaveBeenCalledTimes(1);
   });
 });
