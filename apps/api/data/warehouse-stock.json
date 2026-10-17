@@ -1,0 +1,209 @@
+[
+  {
+    "warehouse_id": "W01",
+    "warehouse_city": "Surabaya",
+    "warehouse_distance_km": 5,
+    "warehouse_has_cold_storage": false,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P001",
+    "quantity": 200
+  },
+  {
+    "warehouse_id": "W01",
+    "warehouse_city": "Surabaya",
+    "warehouse_distance_km": 5,
+    "warehouse_has_cold_storage": false,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P003",
+    "quantity": 500
+  },
+  {
+    "warehouse_id": "W01",
+    "warehouse_city": "Surabaya",
+    "warehouse_distance_km": 5,
+    "warehouse_has_cold_storage": false,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P005",
+    "quantity": 300
+  },
+  {
+    "warehouse_id": "W02",
+    "warehouse_city": "Surabaya",
+    "warehouse_distance_km": 12,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P001",
+    "quantity": 50
+  },
+  {
+    "warehouse_id": "W02",
+    "warehouse_city": "Surabaya",
+    "warehouse_distance_km": 12,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P002",
+    "quantity": 30
+  },
+  {
+    "warehouse_id": "W02",
+    "warehouse_city": "Surabaya",
+    "warehouse_distance_km": 12,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P004",
+    "quantity": 20
+  },
+  {
+    "warehouse_id": "W03",
+    "warehouse_city": "Sidoarjo",
+    "warehouse_distance_km": 25,
+    "warehouse_has_cold_storage": false,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P001",
+    "quantity": 300
+  },
+  {
+    "warehouse_id": "W03",
+    "warehouse_city": "Sidoarjo",
+    "warehouse_distance_km": 25,
+    "warehouse_has_cold_storage": false,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P003",
+    "quantity": 200
+  },
+  {
+    "warehouse_id": "W04",
+    "warehouse_city": "Gresik",
+    "warehouse_distance_km": 30,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": true,
+    "product_id": "P002",
+    "quantity": 40
+  },
+  {
+    "warehouse_id": "W04",
+    "warehouse_city": "Gresik",
+    "warehouse_distance_km": 30,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": true,
+    "product_id": "P004",
+    "quantity": 25
+  },
+  {
+    "warehouse_id": "W04",
+    "warehouse_city": "Gresik",
+    "warehouse_distance_km": 30,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": true,
+    "product_id": "P005",
+    "quantity": 100
+  },
+  {
+    "warehouse_id": "W05",
+    "warehouse_city": "Malang",
+    "warehouse_distance_km": 90,
+    "warehouse_has_cold_storage": false,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P001",
+    "quantity": 400
+  },
+  {
+    "warehouse_id": "W05",
+    "warehouse_city": "Malang",
+    "warehouse_distance_km": 90,
+    "warehouse_has_cold_storage": false,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P003",
+    "quantity": 300
+  },
+  {
+    "warehouse_id": "W05",
+    "warehouse_city": "Malang",
+    "warehouse_distance_km": 90,
+    "warehouse_has_cold_storage": false,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P005",
+    "quantity": 500
+  },
+  {
+    "warehouse_id": "W06",
+    "warehouse_city": "Malang",
+    "warehouse_distance_km": 95,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P002",
+    "quantity": 20
+  },
+  {
+    "warehouse_id": "W06",
+    "warehouse_city": "Malang",
+    "warehouse_distance_km": 95,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P004",
+    "quantity": 30
+  },
+  {
+    "warehouse_id": "W06",
+    "warehouse_city": "Malang",
+    "warehouse_distance_km": 95,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": false,
+    "product_id": "P003",
+    "quantity": 100
+  },
+  {
+    "warehouse_id": "W07",
+    "warehouse_city": "Pasuruan",
+    "warehouse_distance_km": 45,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": true,
+    "product_id": "P002",
+    "quantity": 8
+  },
+  {
+    "warehouse_id": "W07",
+    "warehouse_city": "Pasuruan",
+    "warehouse_distance_km": 45,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": true,
+    "product_id": "P004",
+    "quantity": 10
+  },
+  {
+    "warehouse_id": "W07",
+    "warehouse_city": "Pasuruan",
+    "warehouse_distance_km": 45,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": true,
+    "product_id": "P001",
+    "quantity": 150
+  },
+  {
+    "warehouse_id": "W08",
+    "warehouse_city": "Jember",
+    "warehouse_distance_km": 150,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": true,
+    "product_id": "P002",
+    "quantity": 60
+  },
+  {
+    "warehouse_id": "W08",
+    "warehouse_city": "Jember",
+    "warehouse_distance_km": 150,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": true,
+    "product_id": "P004",
+    "quantity": 50
+  },
+  {
+    "warehouse_id": "W08",
+    "warehouse_city": "Jember",
+    "warehouse_distance_km": 150,
+    "warehouse_has_cold_storage": true,
+    "warehouse_has_refrigerated_fleet": true,
+    "product_id": "P005",
+    "quantity": 200
+  }
+]

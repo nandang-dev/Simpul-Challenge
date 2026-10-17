@@ -1,0 +1,37 @@
+[
+  {
+    "product_id": "P001",
+    "name": "Surgical Gloves",
+    "category": "Medical Supplies",
+    "unit": "box of 100",
+    "requires_cold_chain": false
+  },
+  {
+    "product_id": "P002",
+    "name": "Vaccine — Hepatitis B",
+    "category": "Pharmaceutical",
+    "unit": "10-dose vial",
+    "requires_cold_chain": true
+  },
+  {
+    "product_id": "P003",
+    "name": "Disposable Syringe",
+    "category": "Medical Supplies",
+    "unit": "box of 50",
+    "requires_cold_chain": false
+  },
+  {
+    "product_id": "P004",
+    "name": "Vaccine — Tetanus Toxoid",
+    "category": "Pharmaceutical",
+    "unit": "10-dose vial",
+    "requires_cold_chain": true
+  },
+  {
+    "product_id": "P005",
+    "name": "Paracetamol Tablets",
+    "category": "Pharmaceutical",
+    "unit": "box of 100",
+    "requires_cold_chain": false
+  }
+]
