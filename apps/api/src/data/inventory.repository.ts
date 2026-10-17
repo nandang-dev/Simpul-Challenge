@@ -1,71 +1,81 @@
 import { Injectable } from '@nestjs/common';
 import type { ProductResponse, WarehouseResponse } from '@simpul/shared';
 import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
-
-interface ProductRecord {
-  product_id: string;
-  name: string;
-  category: string;
-  unit: string;
-  requires_cold_chain: boolean;
-}
-
-interface WarehouseStockRecord {
-  warehouse_id: string;
-  warehouse_city: string;
-  warehouse_distance_km: number;
-  warehouse_has_cold_storage: boolean;
-  warehouse_has_refrigerated_fleet: boolean;
-  product_id: string;
-  quantity: number;
-}
+import { join, resolve } from 'node:path';
+import { DataIntegrityError } from './data-integrity.error';
+import {
+  collectProductIds,
+  validateProductRows,
+  validateStockRows,
+} from './inventory-data.validation';
 
 @Injectable()
 export class InventoryRepository {
   getProducts(): ProductResponse[] {
-    const filePath = join(__dirname, '../../data/products.json');
-    const products = JSON.parse(readFileSync(filePath, 'utf8')) as ProductRecord[];
+    const result = validateProductRows(this.readJson('products.json'));
+    this.throwIfInvalid(result.issues);
+    return result.data;
+  }
 
-    return products.map((product) => ({
-      id: product.product_id,
-      name: product.name,
-      category: product.category,
-      unit: product.unit,
-      requiresColdChain: product.requires_cold_chain,
-    }));
+  findProductsByIds(ids: string[]): ProductResponse[] {
+    const requestedIds = new Set(ids);
+    return this.getProducts().filter((product) => requestedIds.has(product.id));
+  }
+
+  findStockByProductIds(ids: string[]) {
+    const { stock } = this.getValidatedInventory();
+    const requestedIds = new Set(ids);
+    return stock.filter((row) => requestedIds.has(row.productId));
   }
 
   getWarehouses(): WarehouseResponse[] {
-    const filePath = join(__dirname, '../../data/warehouse-stock.json');
-    const rows = JSON.parse(readFileSync(filePath, 'utf8')) as WarehouseStockRecord[];
-    const productNames = new Map(
-      this.getProducts().map((product) => [product.id, product.name]),
-    );
+    const { products, stock } = this.getValidatedInventory();
+    const productNames = new Map(products.map((product) => [product.id, product.name]));
     const warehouses = new Map<string, WarehouseResponse>();
 
-    for (const row of rows) {
-      let warehouse = warehouses.get(row.warehouse_id);
+    for (const row of stock) {
+      let warehouse = warehouses.get(row.warehouseId);
 
       if (!warehouse) {
         warehouse = {
-          id: row.warehouse_id,
-          city: row.warehouse_city,
-          distanceKm: row.warehouse_distance_km,
-          hasColdStorage: row.warehouse_has_cold_storage,
-          hasRefrigeratedFleet: row.warehouse_has_refrigerated_fleet,
+          id: row.warehouseId,
+          city: row.warehouseCity,
+          distanceKm: row.warehouseDistanceKm,
+          hasColdStorage: row.warehouseHasColdStorage,
+          hasRefrigeratedFleet: row.warehouseHasRefrigeratedFleet,
           stock: [],
         };
-        warehouses.set(row.warehouse_id, warehouse);
+        warehouses.set(row.warehouseId, warehouse);
       }
 
       warehouse.stock.push({
-        productId: row.product_id,
-        productName: productNames.get(row.product_id) ?? row.product_id,
+        productId: row.productId,
+        productName: productNames.get(row.productId) ?? row.productId,
         quantity: row.quantity,
       });
     }
 
     return [...warehouses.values()];
+  }
+
+  private getValidatedInventory() {
+    const productRows = this.readJson('products.json');
+    const stockRows = this.readJson('warehouse-stock.json');
+    const products = validateProductRows(productRows);
+    const stock = validateStockRows(stockRows, collectProductIds(productRows));
+
+    this.throwIfInvalid([...products.issues, ...stock.issues]);
+    return { products: products.data, stock: stock.data };
+  }
+
+  private readJson(fileName: string): unknown {
+    const dataDir = resolve(process.env.DATA_DIR ?? join(__dirname, '../../data'));
+    return JSON.parse(readFileSync(join(dataDir, fileName), 'utf8')) as unknown;
+  }
+
+  private throwIfInvalid(issues: string[]): void {
+    if (issues.length > 0) {
+      throw new DataIntegrityError(issues);
+    }
   }
 }
