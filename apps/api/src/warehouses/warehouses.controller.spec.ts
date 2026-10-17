@@ -20,12 +20,11 @@ describe('WarehousesController', () => {
         ],
       },
     ];
-    const service = {
-      getWarehouses: jest.fn().mockReturnValue(warehouses),
-    } as unknown as WarehousesService;
+    const getWarehouses = jest.fn().mockReturnValue(warehouses);
+    const service = { getWarehouses } as unknown as WarehousesService;
     const controller = new WarehousesController(service);
 
     expect(controller.getWarehouses()).toBe(warehouses);
-    expect(service.getWarehouses).toHaveBeenCalledTimes(1);
+    expect(getWarehouses).toHaveBeenCalledTimes(1);
   });
 });
