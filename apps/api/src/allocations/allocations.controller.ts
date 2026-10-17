@@ -1,24 +1,20 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import type { AllocationRequest, AllocationResponse } from '@simpul/shared';
+import type { AllocationResponse } from '@simpul/shared';
 import { AllocationRequestDto } from './dto/allocation-request.dto';
 import { AllocationResponseDto } from './dto/allocation-response.dto';
-
-interface AllocationServiceContract {
-  create(request: AllocationRequest): AllocationResponse;
-}
+import { AllocationsService } from './allocations.service';
 
 @ApiTags('Allocations')
 @Controller('allocations')
 export class AllocationsController {
   constructor(
-    @Inject('ALLOCATION_SERVICE')
-    private readonly allocationService: AllocationServiceContract,
+    private readonly allocationService: AllocationsService,
   ) {}
 
   @Post()

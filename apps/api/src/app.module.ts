@@ -9,15 +9,18 @@ import { ProductsService } from './products/products.service';
 import { WarehousesController } from './warehouses/warehouses.controller';
 import { WarehousesService } from './warehouses/warehouses.service';
 import { HealthController } from './health';
+import { AllocationsController } from './allocations/allocations.controller';
+import { AllocationsService } from './allocations/allocations.service';
 
 @Module({
   imports: [],
-  controllers: [AppController, HealthController, ProductsController, WarehousesController],
+  controllers: [AppController, HealthController, ProductsController, WarehousesController, AllocationsController],
   providers: [
     AppService,
     InventoryRepository,
     ProductsService,
     WarehousesService,
+    AllocationsService,
     { provide: APP_FILTER, useClass: DataIntegrityExceptionFilter },
   ],
 })

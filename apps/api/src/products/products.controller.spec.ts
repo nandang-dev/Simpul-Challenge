@@ -20,12 +20,11 @@ describe('ProductsController', () => {
         requiresColdChain: true,
       },
     ];
-    const service = {
-      getProducts: jest.fn().mockReturnValue(products),
-    } as unknown as ProductsService;
+    const getProducts = jest.fn().mockReturnValue(products);
+    const service = { getProducts } as unknown as ProductsService;
     const controller = new ProductsController(service);
 
     expect(controller.getProducts()).toBe(products);
-    expect(service.getProducts).toHaveBeenCalledTimes(1);
+    expect(getProducts).toHaveBeenCalledTimes(1);
   });
 });
