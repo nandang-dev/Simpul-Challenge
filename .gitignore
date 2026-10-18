@@ -11,8 +11,6 @@ coverage/
 *.tsbuildinfo
 
 # Env files
-.env
-.env.*
 !.env.example
 
 # Logs
@@ -24,3 +22,4 @@ yarn-error.log*
 
 # OS files
 .DS_Store
+config.bat
