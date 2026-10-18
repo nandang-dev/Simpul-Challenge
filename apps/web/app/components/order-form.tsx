@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { AllocationRequest, AllocationResponse, ProductResponse } from "@simpul/shared";
+import AllocationResults from "./allocation-results";
 import styles from "./order-form.module.css";
 
 interface OrderLineDraft {
@@ -108,7 +109,14 @@ export default function OrderForm() {
         body: JSON.stringify(requestBody),
       });
       const payload: unknown = await response.json().catch(() => null);
-      if (!response.ok) throw new Error(getApiMessage(payload) ?? `API merespons dengan status ${response.status}.`);
+      if (!response.ok) {
+        const apiMessage = getApiMessage(payload);
+        if (response.status >= 500) {
+          const detail = apiMessage ? ` Detail: ${apiMessage}` : " Coba lagi sebentar.";
+          throw new Error(`Server allocation sedang bermasalah (HTTP ${response.status}).${detail}`);
+        }
+        throw new Error(apiMessage ?? `API merespons dengan status ${response.status}.`);
+      }
       setAllocation(payload as AllocationResponse);
     } catch (error: unknown) {
       setRequestError(error instanceof Error ? `Permintaan gagal: ${error.message}` : "Permintaan gagal. Periksa koneksi ke API.");
@@ -176,12 +184,8 @@ export default function OrderForm() {
             {requestError && <p className={styles.errorBanner} role="alert">{requestError}</p>}
             <div className={styles.submitRow}><p>Allocation rules are applied by the API.</p><button className={styles.submitButton} disabled={isSubmitting || productsLoading || products.length === 0} type="submit">{isSubmitting ? "Allocating…" : "Allocate order"}<span aria-hidden="true">↗</span></button></div>
           </form>
-          {allocation && <div className={styles.successNotice} role="status"><strong>Allocation received</strong><span>The API returned a {allocation.status.toLowerCase()} plan. The allocation view is the next phase.</span></div>}
         </section>
-        <section className={styles.nextSection} aria-labelledby="allocation-title">
-          <div className={styles.nextHeading}><div><p className={styles.eyebrow}>FULFILMENT / RESULTS</p><h2 id="allocation-title">Allocation</h2></div><span className={styles.stepMark}>02 <span>/ 02</span></span></div>
-          <p className={styles.emptyHint}>Submit an order to see the allocation decision, shipment distance, and warehouse breakdown here.</p>
-        </section>
+        <AllocationResults allocation={allocation} products={products} />
       </div>
       <footer className={styles.footer}><span>SIMPUL / INVENTORY OPERATIONS</span><span>API-DRIVEN ALLOCATION</span></footer>
     </main>

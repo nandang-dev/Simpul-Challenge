@@ -360,18 +360,6 @@
   line-height: 1.5;
 }
 
-.successNotice {
-  display: grid;
-  gap: 4px;
-  border-left-color: var(--green);
-  color: #234536;
-  background: #eaf2e9;
-}
-
-.successNotice span {
-  color: #53675a;
-}
-
 .nextSection {
   min-height: 206px;
   border-top: 1px solid var(--line);
