@@ -7,11 +7,11 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:api": "npm run start:dev --workspace apps/api",
-    "dev:web": "npm run dev --workspace apps/web",
-    "build:api": "npm run build --workspace apps/api",
-    "build:web": "npm run build --workspace apps/web",
-    "build:shared": "npm run build --workspace packages/shared",
+    "dev:api": "node init && npm run start:dev --workspace apps/api",
+    "dev:web": "node init && npm run dev --workspace apps/web",
+    "build:api": "node init && npm run build --workspace apps/api",
+    "build:web": "node init && npm run build --workspace apps/web",
+    "build:shared": "node init && npm run build --workspace packages/shared",
     "lint:api": "npm run lint --workspace apps/api",
     "lint:web": "npm run lint --workspace apps/web",
     "test": "echo \"No tests yet\""
